@@ -1,4 +1,4 @@
-﻿import { PayoutStore } from "./db/store.js";
+import { PayoutStore } from "./db/store.js";
 import { createSeedData } from "./db/seed.js";
 import { createServices } from "./services/index.js";
 import { formatRupees } from "./shared/money.js";

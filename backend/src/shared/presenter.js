@@ -1,4 +1,4 @@
-﻿import { fromPaise } from "./money.js";
+import { fromPaise } from "./money.js";
 
 export function exposeMoney(value) {
   return {

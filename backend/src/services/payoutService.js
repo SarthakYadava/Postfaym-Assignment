@@ -1,4 +1,4 @@
-﻿const ADVANCE_RATE = 0.1;
+const ADVANCE_RATE = 0.1;
 
 export class PayoutService {
   constructor(store, ledgerService) {

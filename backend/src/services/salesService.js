@@ -1,4 +1,4 @@
-﻿import { AppError } from "../shared/errors.js";
+import { AppError } from "../shared/errors.js";
 import { toPaise } from "../shared/money.js";
 
 export class SalesService {

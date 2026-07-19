@@ -1,4 +1,4 @@
-﻿export class LedgerService {
+export class LedgerService {
   constructor(store) {
     this.store = store;
   }

@@ -1,4 +1,4 @@
-﻿import cors from "cors";
+import cors from "cors";
 import express from "express";
 import { createServices } from "./services/index.js";
 import { AppError } from "./shared/errors.js";

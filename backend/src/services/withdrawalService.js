@@ -1,4 +1,4 @@
-﻿import { AppError } from "../shared/errors.js";
+import { AppError } from "../shared/errors.js";
 import { toPaise } from "../shared/money.js";
 
 const RECOVERABLE_STATUSES = new Set(["failed", "cancelled", "rejected"]);

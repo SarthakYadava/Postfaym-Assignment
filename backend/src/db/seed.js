@@ -1,4 +1,4 @@
-﻿import { toPaise } from "../shared/money.js";
+import { toPaise } from "../shared/money.js";
 
 export function createSeedData() {
   const now = new Date("2026-07-19T08:30:00.000Z").toISOString();

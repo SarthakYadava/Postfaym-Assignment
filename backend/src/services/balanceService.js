@@ -1,4 +1,4 @@
-﻿export class BalanceService {
+export class BalanceService {
   constructor(store, ledgerService, withdrawalService) {
     this.store = store;
     this.ledgerService = ledgerService;

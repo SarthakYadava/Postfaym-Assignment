@@ -1,4 +1,4 @@
-﻿export function toPaise(value) {
+export function toPaise(value) {
   if (typeof value !== "number" || Number.isNaN(value)) {
     throw new Error("Amount must be a number");
   }

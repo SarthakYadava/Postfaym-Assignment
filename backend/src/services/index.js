@@ -1,4 +1,4 @@
-﻿import { store } from "../db/store.js";
+import { store } from "../db/store.js";
 import { BalanceService } from "./balanceService.js";
 import { LedgerService } from "./ledgerService.js";
 import { PayoutService } from "./payoutService.js";
