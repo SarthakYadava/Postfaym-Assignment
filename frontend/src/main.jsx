@@ -8,6 +8,23 @@ import "./styles.css";
 const API_BASE = import.meta.env.VITE_API_BASE ?? "http://localhost:4000/api";
 const USER_ID = "john_doe";
 
+function ledgerLabel(type) {
+  return type
+    .toLowerCase()
+    .split("_")
+    .map((word) => word[0].toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
+function ledgerDate(value) {
+  return new Intl.DateTimeFormat("en-IN", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  }).format(new Date(value));
+}
 function rupees(value) {
   return new Intl.NumberFormat("en-IN", {
     style: "currency",
@@ -236,7 +253,7 @@ function App() {
                 <span className={entry.direction === "credit" ? "dot credit" : "dot debit"} />
                 <div>
                   <strong>{entry.description}</strong>
-                  <p>{entry.type.replaceAll("_", " ")} ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· {new Date(entry.createdAt).toLocaleString()}</p>
+                  <p>{ledgerLabel(entry.type)} - {ledgerDate(entry.createdAt)}</p>
                 </div>
                 <b className={entry.direction}>{entry.direction === "credit" ? "+" : "-"}{rupees(entry.amount.rupees)}</b>
               </div>
