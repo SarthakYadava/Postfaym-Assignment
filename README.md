@@ -37,9 +37,9 @@ npm run dev:web
 
 ## Screenshots
 
-![Payout dashboard top half](docs/screenshots/dashboard-top-final.jpg)
+![Payout dashboard top half](docs/screenshots/dashboard-readme-part-1.png)
 
-![Payout dashboard bottom half](docs/screenshots/dashboard-mobile-part-2.jpg)
+![Payout dashboard bottom half](docs/screenshots/dashboard-readme-part-2.png)
 ## Product Flow
 
 The seeded demo starts with three pending sales of Rs 40 each for `john_doe`.
