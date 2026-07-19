@@ -37,13 +37,7 @@ npm run dev:web
 
 ## Screenshots
 
-### Dashboard Overview
-
-![Dashboard overview](docs/screenshots/dashboard-overview.jpg)
-
-### Ledger Timeline
-
-![Ledger timeline](docs/screenshots/ledger-timeline.jpg)
+![Payout dashboard](docs/screenshots/dashboard-latest.jpg)
 ## Product Flow
 
 The seeded demo starts with three pending sales of Rs 40 each for `john_doe`.
