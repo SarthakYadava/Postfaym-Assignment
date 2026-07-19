@@ -37,7 +37,7 @@ npm run dev:web
 
 ## Screenshots
 
-![Payout dashboard top half](docs/screenshots/dashboard-mobile-part-1.jpg)
+![Payout dashboard top half](docs/screenshots/dashboard-top-final.jpg)
 
 ![Payout dashboard bottom half](docs/screenshots/dashboard-mobile-part-2.jpg)
 ## Product Flow
