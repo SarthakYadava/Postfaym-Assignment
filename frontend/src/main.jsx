@@ -96,7 +96,7 @@ function App() {
           </div>
           <button className="ghost-button" onClick={() => runAction(() => api("/demo/reset", { method: "POST" }), "Demo data reset.")} disabled={loading}>
             <RefreshCcw size={16} />
-            Reset demo
+            Reset workspace
           </button>
         </nav>
 
@@ -234,7 +234,7 @@ function App() {
                 <span className={entry.direction === "credit" ? "dot credit" : "dot debit"} />
                 <div>
                   <strong>{entry.description}</strong>
-                  <p>{entry.type.replaceAll("_", " ")} Ã‚Â· {new Date(entry.createdAt).toLocaleString()}</p>
+                  <p>{entry.type.replaceAll("_", " ")} Ãƒâ€šÃ‚Â· {new Date(entry.createdAt).toLocaleString()}</p>
                 </div>
                 <b className={entry.direction}>{entry.direction === "credit" ? "+" : "-"}{rupees(entry.amount.rupees)}</b>
               </div>
