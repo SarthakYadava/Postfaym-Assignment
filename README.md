@@ -35,6 +35,15 @@ npm run dev:web
 | Working implementation in JavaScript | Node.js backend and React frontend |
 | Design decisions and trade-offs | `docs/lld.md` and this README |
 
+## Screenshots
+
+### Dashboard Overview
+
+![Dashboard overview](docs/screenshots/dashboard-overview.jpg)
+
+### Ledger Timeline
+
+![Ledger timeline](docs/screenshots/ledger-timeline.jpg)
 ## Product Flow
 
 The seeded demo starts with three pending sales of Rs 40 each for `john_doe`.
