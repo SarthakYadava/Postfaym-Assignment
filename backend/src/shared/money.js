@@ -11,9 +11,5 @@ export function fromPaise(value) {
 }
 
 export function formatRupees(value) {
-  return new Intl.NumberFormat("en-IN", {
-    style: "currency",
-    currency: "INR",
-    maximumFractionDigits: 2,
-  }).format(fromPaise(value));
+  return `Rs ${fromPaise(value).toFixed(2)}`;
 }
