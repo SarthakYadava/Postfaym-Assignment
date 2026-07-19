@@ -1,17 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
-import {
-  ArrowDownToLine,
-  BadgeIndianRupee,
-  CheckCircle2,
-  Clock3,
-  RefreshCcw,
-  ShieldCheck,
-  Sparkles,
-  Store,
-  Wallet,
-  XCircle,
-} from "lucide-react";
+import { CheckCircle2, RefreshCcw, XCircle } from "lucide-react";
+import { demoApi } from "./demoEngine.js";
+import iconSheet from "./assets/payout-icon-sheet.png";
 import "./styles.css";
 
 const API_BASE = import.meta.env.VITE_API_BASE ?? "http://localhost:4000/api";
@@ -26,17 +17,21 @@ function rupees(value) {
 }
 
 async function api(path, options = {}) {
-  const response = await fetch(`${API_BASE}${path}`, {
-    headers: { "Content-Type": "application/json", ...(options.headers ?? {}) },
-    ...options,
-  });
+  try {
+    const response = await fetch(`${API_BASE}${path}`, {
+      headers: { "Content-Type": "application/json", ...(options.headers ?? {}) },
+      ...options,
+    });
 
-  const data = await response.json();
-  if (!response.ok) {
-    throw new Error(data.error?.message ?? "Request failed");
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.error?.message ?? "Request failed");
+    }
+
+    return data;
+  } catch (error) {
+    return demoApi(path, options);
   }
-
-  return data;
 }
 
 function App() {
@@ -108,7 +103,7 @@ function App() {
         <div className="hero-grid">
           <div className="wallet-card">
             <div className="card-head">
-              <Wallet size={22} />
+              <ImgIcon name="wallet" size="small" />
               <span>Available balance</span>
             </div>
             <strong>{rupees(summary?.availableBalance?.rupees)}</strong>
@@ -118,9 +113,9 @@ function App() {
             </div>
           </div>
 
-          <MetricCard icon={<Clock3 size={19} />} label="Pending earnings" value={rupees(summary?.pendingEarnings?.rupees)} tone="mint" />
-          <MetricCard icon={<Sparkles size={19} />} label="Advance paid" value={rupees(summary?.advancePaid?.rupees)} tone="sun" />
-          <MetricCard icon={<ShieldCheck size={19} />} label="Final settlement" value={rupees(settlement)} tone="ink" />
+          <MetricCard icon="ledger" label="Pending earnings" value={rupees(summary?.pendingEarnings?.rupees)} tone="mint" />
+          <MetricCard icon="advance" label="Advance paid" value={rupees(summary?.advancePaid?.rupees)} tone="sun" />
+          <MetricCard icon="shield" label="Final settlement" value={rupees(settlement)} tone="ink" />
         </div>
       </section>
 
@@ -130,7 +125,7 @@ function App() {
           onClick={() => runAction(() => api("/payouts/advance/run", { method: "POST", body: JSON.stringify({ userId: USER_ID }) }), "Advance payout job finished.")}
           disabled={loading}
         >
-          <BadgeIndianRupee size={18} />
+          <ImgIcon name="advance" size="tiny" />
           Run advance payout
         </button>
         <p>{notice}</p>
@@ -143,7 +138,7 @@ function App() {
               <p className="eyebrow">Affiliate sales</p>
               <h2>Reconciliation Queue</h2>
             </div>
-            <Store size={22} />
+            <ImgIcon name="wallet" size="small" />
           </div>
           <div className="table-wrap">
             <table>
@@ -188,7 +183,7 @@ function App() {
               <p className="eyebrow">Bank transfer</p>
               <h2>Withdraw</h2>
             </div>
-            <ArrowDownToLine size={22} />
+            <ImgIcon name="advance" size="small" />
           </div>
           <label className="input-label" htmlFor="withdrawAmount">Amount</label>
           <div className="money-input">
@@ -230,7 +225,7 @@ function App() {
               <p className="eyebrow">Audit trail</p>
               <h2>Ledger Timeline</h2>
             </div>
-            <ShieldCheck size={22} />
+            <ImgIcon name="ledger" size="small" />
           </div>
           <div className="timeline">
             {ledger.length === 0 ? <p className="empty-text">Run the advance payout job to create ledger entries.</p> : null}
@@ -239,7 +234,7 @@ function App() {
                 <span className={entry.direction === "credit" ? "dot credit" : "dot debit"} />
                 <div>
                   <strong>{entry.description}</strong>
-                  <p>{entry.type.replaceAll("_", " ")} · {new Date(entry.createdAt).toLocaleString()}</p>
+                  <p>{entry.type.replaceAll("_", " ")} Ã‚Â· {new Date(entry.createdAt).toLocaleString()}</p>
                 </div>
                 <b className={entry.direction}>{entry.direction === "credit" ? "+" : "-"}{rupees(entry.amount.rupees)}</b>
               </div>
@@ -254,11 +249,15 @@ function App() {
 function MetricCard({ icon, label, value, tone }) {
   return (
     <div className={`metric-card ${tone}`}>
-      <div>{icon}</div>
+      <div><ImgIcon name={icon} /></div>
       <span>{label}</span>
       <strong>{value}</strong>
     </div>
   );
+}
+
+function ImgIcon({ name, size = "normal" }) {
+  return <span className={`img-icon ${name} ${size}`} style={{ backgroundImage: `url(${iconSheet})` }} aria-hidden="true" />;
 }
 
 function StatusBadge({ status }) {
