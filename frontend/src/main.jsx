@@ -17,21 +17,23 @@ function rupees(value) {
 }
 
 async function api(path, options = {}) {
+  let response;
+
   try {
-    const response = await fetch(`${API_BASE}${path}`, {
+    response = await fetch(`${API_BASE}${path}`, {
       headers: { "Content-Type": "application/json", ...(options.headers ?? {}) },
       ...options,
     });
-
-    const data = await response.json();
-    if (!response.ok) {
-      throw new Error(data.error?.message ?? "Request failed");
-    }
-
-    return data;
   } catch (error) {
     return demoApi(path, options);
   }
+
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.error?.message ?? "Request failed");
+  }
+
+  return data;
 }
 
 function App() {
@@ -234,7 +236,7 @@ function App() {
                 <span className={entry.direction === "credit" ? "dot credit" : "dot debit"} />
                 <div>
                   <strong>{entry.description}</strong>
-                  <p>{entry.type.replaceAll("_", " ")} Ãƒâ€šÃ‚Â· {new Date(entry.createdAt).toLocaleString()}</p>
+                  <p>{entry.type.replaceAll("_", " ")} ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â· {new Date(entry.createdAt).toLocaleString()}</p>
                 </div>
                 <b className={entry.direction}>{entry.direction === "credit" ? "+" : "-"}{rupees(entry.amount.rupees)}</b>
               </div>
